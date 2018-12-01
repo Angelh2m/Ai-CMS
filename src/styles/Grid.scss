@@ -1,0 +1,61 @@
+/* GRID */
+
+$margin-bottom : 11rem;
+
+.container--block {
+
+    max-width: 68rem;
+    display: block;
+    margin: 0 auto;
+}
+
+.container--flex {
+    display: flex;
+    justify-content: space-between;
+
+    hr {
+        position: relative;
+        border: solid .1px #e8e8e8;
+        margin-top: 13rem;
+    }
+
+    .col-8 {
+        flex: 8;
+        position: relative;
+    }
+
+    .col-7 {
+        flex: 7;
+        position: relative;
+    }
+
+    .col-3 {
+        flex: 3;
+        position: relative;
+    }
+
+    .col-2-half {
+        flex: 2.5;
+        position: relative;
+    }
+
+    .col-2 {
+        flex: 2;
+        position: relative;
+    }
+
+    .col-9 {
+        flex: 9;
+        position: relative;
+    }
+
+    .col-1 {
+        flex: 1;
+        position: relative;
+    }
+
+    aside {
+        flex: 1;
+        padding-left: 2rem;
+    }
+}

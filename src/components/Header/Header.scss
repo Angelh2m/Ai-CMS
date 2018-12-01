@@ -1,0 +1,113 @@
+@import '../../styles/Variables.module.scss';
+
+.c_header {
+    width: 100%;
+
+    h1,
+    a {
+        color: $color-black;
+        font-size: 1.5rem;
+    }
+
+    span {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__top {
+        background-color: $color-pink;
+        padding: $main-margin-padding/3 $main-margin-padding;
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        width: 100%;
+        z-index: 99;
+
+        a {
+            font-size: .8rem;
+            margin-right: .5rem;
+        }
+    }
+
+    &__bottom {
+        padding: $main-margin-padding/3 $main-margin-padding;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: solid 1px whitesmoke;
+        align-items: center;
+        padding: 1rem 2rem;
+        padding-top: 3.5rem;
+
+        h1 {
+            margin: 0;
+        }
+
+        li {
+            display: inline-block;
+            margin: 0 1rem;
+        }
+    }
+
+    &__burger {
+        width: 2rem;
+        height: 1rem;
+        position: relative;
+
+        i {
+            position: absolute;
+            z-index: 99;
+            right: 0;
+            top: 0;
+        }
+    }
+
+
+    &__side_navigation {
+        position: fixed;
+        width: 36%;
+        background-color: $color-pink;
+        min-width: 20rem;
+        top: 0;
+        height: 100vh;
+        z-index: 9;
+        padding: 2rem;
+
+        &__hidden {
+            transform: translate(-80vw);
+            transition: transform 1s;
+            opacity: none;
+        }
+
+        &__show {
+            transform: translate(0vw);
+            transition: transform 1s;
+        }
+
+        h3 {
+            margin-top: 2.5rem;
+        }
+
+    }
+
+    &__background {
+        position: fixed;
+        content: '';
+        background-color: rgba(10, 9, 9, 0.53);
+        z-index: 0;
+        width: 100vw;
+        height: 100%;
+        top: 0;
+    }
+
+
+
+    &__search {
+        font-family: 'Lato', sans-serif;
+        font-size: 1.2rem;
+        border: none;
+        padding: 1.5rem 3.5rem;
+        width: 100%;
+
+
+    }
+}
