@@ -12,6 +12,7 @@ export default function FormFields({
     return (
         <div>
             {textLabel && (<label>{textLabel}</label>)}
+            {name && !textLabel && (<label>{name}</label>)}
             <input
                 type={type}
                 name={name}

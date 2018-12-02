@@ -1,5 +1,5 @@
 import { API_ENDPOINT } from '../config/config';
-
+import { handleStorage } from '../util/localStorage'
 
 const getPosts = (num, category) => {
 
@@ -16,8 +16,9 @@ const getPosts = (num, category) => {
 };
 
 const getSinglePost = (post) => {
+    console.log("POST", post);
 
-    return fetch(`${API_ENDPOINT}/api/posts/post/${post.replace('/', '')}`)
+    return fetch(`${API_ENDPOINT}/api/posts/post/${post}`)
         .then(res => {
             return res.json()
         })
@@ -39,8 +40,57 @@ const getCategories = (category) => {
         .catch(err => console.log(err))
 }
 
+const makePost = (token, payload) => {
+    console.log(payload);
+
+    return fetch(`${API_ENDPOINT}/api/posts`, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+    })
+        .then((response) => { handleStorage.deleteLocalStorage('bucket'); return response })
+        .catch(error => console.log(error));
+}
+
+const updatePost = (token, payload, post) => {
+
+    console.warn("POST TO EDIT", payload, post);
+
+    return fetch(`${API_ENDPOINT}/api/posts/post/${post}`, {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+    })
+        .then((response) => { handleStorage.deleteLocalStorage('bucket'); return response })
+        .catch(error => console.log(error));
+}
+
+const login = (user) => {
+
+    return fetch(`${API_ENDPOINT}/api/login`, {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+        .then((response) => response.json())
+        .then((token) => token)
+        .catch(error => console.log(error));
+}
+
 export const ENDPOINTS = {
     getSinglePost,
     getPosts,
-    getCategories
+    getCategories,
+    makePost,
+    updatePost,
+    login
 }
+

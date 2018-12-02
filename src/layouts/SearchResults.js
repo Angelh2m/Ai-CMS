@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { ENDPOINTS } from "../services/apiCalls";
-import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar/Sidebar';
-import { dateFormat } from '../util/dateFormat';
+import { Link } from 'react-router-dom';
+
+
 
 
 export default class SearchResults extends Component {
@@ -14,25 +15,36 @@ export default class SearchResults extends Component {
     componentWillMount() {
         const path = this.props.location.pathname.split('/');
         ENDPOINTS.getCategories(path[path.length - 1]).then(posts => {
-            console.log(posts);
-            this.setState({ posts })
+
+            if (posts.category.length > 0 || posts.tags.length > 0) {
+                return this.setState({ posts })
+            }
+
+            this.setState({ message: path })
+
+
         })
     }
 
     render() {
         const { posts } = this.state;
-        console.log("POST", posts.category);
 
         return (
             <div className="container--flex posts">
                 <div className="col-7" >
-
+                    {this.state.message && (
+                        <div>
+                            <span>We have not found any posts for : </span>
+                            <h1>{this.state.message}</h1>
+                        </div>
+                    )}
                     {posts.category && posts.category.map((post, i) => (
                         <div className="Card" key={i}>
 
                             <div className="col-7 ">
-
-                                <img src={post.image} alt={post.title} />
+                                <Link to={`${post.category}/${post.seoUrl}`}>
+                                    <img src={post.image} alt={post.title} />
+                                </Link>
                                 <div className="col-9">
                                     <div className="posts__content">
                                         <h2>{post.title}</h2>

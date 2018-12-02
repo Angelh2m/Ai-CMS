@@ -1,17 +1,22 @@
 /* GRID */
 
 $margin-bottom : 11rem;
+$max-witdh: 68rem;
 
 .container--block {
 
-    max-width: 68rem;
+    max-width: $max-witdh;
     display: block;
     margin: 0 auto;
 }
 
 .container--flex {
-    display: flex;
+
     justify-content: space-between;
+
+    @include tablet {
+        display: flex;
+    }
 
     hr {
         position: relative;

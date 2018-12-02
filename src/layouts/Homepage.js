@@ -3,6 +3,7 @@ import { ENDPOINTS } from "../services/apiCalls";
 import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar/Sidebar';
 import { dateFormat } from '../util/dateFormat';
+import SocialMedia from '../components/SocialMedia/SocialMedia';
 
 
 export default class Homepage extends Component {
@@ -28,6 +29,8 @@ export default class Homepage extends Component {
         return result
     }
 
+
+
     render() {
         const { posts } = this.state;
         console.log(posts);
@@ -38,25 +41,8 @@ export default class Homepage extends Component {
                     {posts.map((post, i) => (
                         <section key={i}>
                             <div className="container--flex">
-
                                 <div className="col-1 posts__social-column">
-                                    <div className="posts__side__meta">
-                                        <span className="text__date">{post.date}</span>
-                                        <Link to={post.category}>
-                                            <span className="text__category--black ">{post.category.replace(/-/g, ' ')}</span>
-                                        </Link>
-                                    </div>
-                                    <div className="posts__social__widget">
-                                        <div className="posts__social__toggle">
-                                            <i className="icon-arrow-up--button"></i>
-                                        </div>
-                                        <div className="posts__social__label">
-                                            <i className="icon-facebook"> </i>
-                                            <i className="icon-twitter"> </i>
-                                            <i className="icon-pinterest2"> </i>
-                                        </div>
-                                    </div>
-
+                                    <SocialMedia post={post} />
                                 </div>
                                 <div className="col-7 ">
                                     <Link to={`${post.category}/${post.seoUrl}`}>
@@ -73,9 +59,9 @@ export default class Homepage extends Component {
                                     </div>
                                 </div>
                                 {console.log(post.body.split('').splice(0, 10).join(''))}
-                                <hr />
+
                             </div>
-                            <hr />
+
                         </section>
 
                     ))}
