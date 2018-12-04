@@ -17,7 +17,7 @@ export default class CreatePost extends Component {
         this.state = {
             editorState: EditorState.createEmpty(),
             body: '', title: '',
-            images: ["post-one/IMAGE**********.jpeg", "post-one/TestREACT-BeefBarcaboa.jpg"],
+            images: [],
             seoUrl: '',
             tags: '',
             category: '',

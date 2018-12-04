@@ -16,10 +16,14 @@ import Footer from './components/Footer/Footer';
 
 
 class App extends Component {
+  componentDidUpdate() {
+    window.scrollTo(0, 0)
+  }
 
   render() {
     return (
       <div className="App">
+
         <header className="App-header">
           <Header />
         </header>
@@ -29,7 +33,7 @@ class App extends Component {
           </Switch>
           <Switch>
             <Route exact path="/" component={Homepage} />
-            <PrivateRoute exact path="/login" component={Authenticate} />
+            <Route exact path="/login" component={Authenticate} />
             <PrivateRoute exact path="/write-post/:edit?" component={CreatePost} />
             <Route exact path="/:category/" component={SearchResults} />
             <Route exact path="/:category/:post" component={Post} />

@@ -10,16 +10,13 @@ export default class Authenticate extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-
-        }
+        this.state = {}
 
         this.setValues = this.setValues.bind(this)
         this.submitValues = this.submitValues.bind(this)
     }
 
     setValues(e) {
-        console.log(e);
         this.setState({
             [e.target.name]: e.target.value
         })

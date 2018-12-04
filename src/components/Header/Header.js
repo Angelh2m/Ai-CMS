@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import './Header.scss';
 // import classNames from 'classNames';
 
@@ -8,14 +8,30 @@ class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isActive: false
+      isActive: false,
+      search: ''
     }
     this.toggle = this.toggle.bind(this)
+    this.search = this.search.bind(this)
+
+    this.searchTerm = React.createRef();
+  }
+
+  componentDidUpdate() {
+
   }
 
   toggle() {
     this.setState({ isActive: !this.state.isActive, })
-    console.log('ok', this.state.isActive);
+  }
+
+  search(e) {
+
+    if (e.keyCode === 13 || e.type == 'click') {
+      this.setState({ isActive: !this.state.isActive, })
+      this.props.history.push(this.searchTerm.current.value)
+    }
+
   }
 
   render() {
@@ -31,9 +47,12 @@ class Header extends Component {
     return (
       <div className="c_header" >
         <nav >
+          {this.searchTerm.length > 1 && (
+            <Redirect to={`/${this.searchTerm}`} />
+          )}
           <div className='c_header__top'>
             <div>
-              <Link to="#" > About </Link>
+              <Link to="login" > Login </Link>
               <Link to="#" > FAQ </Link>
               <Link to="#" > Contact </Link>
             </div>
@@ -69,9 +88,11 @@ class Header extends Component {
         {this.state.isActive && (<div onClick={this.toggle} className='c_header__background'>BACKGROUND</div>)}
 
         <div className={`c_header__side_navigation ${this.state.isActive ? 'c_header__side_navigation__show' : 'c_header__side_navigation__hidden'} `}>
-          <i className="icon-search--button"></i>
-
-          <input className='c_header__search' type="text" placeholder="Search..." />
+          <i onClick={this.search} className="icon-search--button"></i>
+          <input
+            onKeyDown={this.search}
+            ref={this.searchTerm}
+            className='c_header__search' type="text" placeholder="Search..." />
           <hr />
 
           <h3>Shop</h3>
@@ -94,4 +115,5 @@ class Header extends Component {
 
 
 
-export default Header
+export default withRouter(Header);
+

@@ -5,7 +5,12 @@ h5,
 span,
 strong,
 label,
-input {
+input,
+a {
     font-family: 'Lato', sans-serif;
     color: $color-black
+}
+
+i {
+    cursor: pointer;
 }

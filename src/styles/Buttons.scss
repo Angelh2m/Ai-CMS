@@ -17,6 +17,23 @@
     }
 }
 
+.button--text {
+    color: black;
+    font-size: .7rem;
+    font-family: Lato;
+    letter-spacing: .5px;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 1s;
+    padding: .5rem 0rem;
+
+    &:hover {
+        transform: translate(25%);
+        transition: all 1s;
+        // letter-spacing: 2px;
+    }
+}
+
 .button--make-post {
     margin-top: 2rem;
     padding: 1rem 3rem;

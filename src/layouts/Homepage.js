@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar/Sidebar';
 import { dateFormat } from '../util/dateFormat';
 import SocialMedia from '../components/SocialMedia/SocialMedia';
+import HelmetSEO from '../util/HelmetSEO';
 
 
 export default class Homepage extends Component {
@@ -33,10 +34,16 @@ export default class Homepage extends Component {
 
     render() {
         const { posts } = this.state;
-        console.log(posts);
 
         return (
             <div className="container--flex posts">
+                <HelmetSEO
+                    title={"Newest Posts"}
+                    description={'Living with Annah'}
+                    image={''}
+                    seoUrl={"livingWithAnnah.com"}
+                />
+
                 <div className="col-7">
                     {posts.map((post, i) => (
                         <section key={i}>
@@ -53,12 +60,13 @@ export default class Homepage extends Component {
                                             <h2>{post.title}</h2>
                                             <p dangerouslySetInnerHTML={{ __html: post.body.replace(/<[^>]*>/g, '').split('').splice(0, 200).join('') }} ></p>
                                             <Link to={`${post.category}/${post.seoUrl}`}>
-                                                <span className="button--pink" >READ MORE</span>
+                                                <span className="button--text " >READ MORE
+                                                    <i className="icon-arrow-right"></i>
+                                                </span>
                                             </Link>
                                         </div>
                                     </div>
                                 </div>
-                                {console.log(post.body.split('').splice(0, 10).join(''))}
 
                             </div>
 

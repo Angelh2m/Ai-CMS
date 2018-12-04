@@ -41,7 +41,6 @@ const getCategories = (category) => {
 }
 
 const makePost = (token, payload) => {
-    console.log(payload);
 
     return fetch(`${API_ENDPOINT}/api/posts`, {
         method: 'POST',
@@ -57,7 +56,6 @@ const makePost = (token, payload) => {
 
 const updatePost = (token, payload, post) => {
 
-    console.warn("POST TO EDIT", payload, post);
 
     return fetch(`${API_ENDPOINT}/api/posts/post/${post}`, {
         method: 'PUT',

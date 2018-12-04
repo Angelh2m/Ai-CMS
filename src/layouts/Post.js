@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ENDPOINTS } from '../services/apiCalls';
 import { dateFormat } from '../util/dateFormat';
 import SocialMedia from '../components/SocialMedia/SocialMedia';
+import HelmetSEO from '../util/HelmetSEO';
 
 export default class Post extends Component {
 
@@ -19,8 +20,7 @@ export default class Post extends Component {
             const date = dateFormat(post.date)
             post = { ...post, date, }
             this.setState({ post })
-            console.log(post);
-
+            // console.log(post);
         })
     }
 
@@ -31,14 +31,16 @@ export default class Post extends Component {
 
     render() {
         const { post } = this.state;
-
-        console.log(post);
-
         let date = new Date();
 
         return (
             <div className="posts" >
-
+                <HelmetSEO
+                    title={post.title}
+                    description={post.description}
+                    image={post.image}
+                    seoUrl={post.seoUrl}
+                />
                 <section>
                     <div className="container--block ">
                         {/* <div className="col-1 posts__social-column">Social</div> */}

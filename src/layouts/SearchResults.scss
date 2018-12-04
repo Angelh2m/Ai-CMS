@@ -1,0 +1,21 @@
+.layout {
+    &__search {
+        display: block;
+        position: relative;
+
+    }
+
+    &__one {
+        position: absolute;
+        top: 50%;
+        background-color: white;
+        padding: 4rem 4rem;
+        width: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+        right: 0;
+        transform: translateY(-50%);
+
+    }
+
+}
