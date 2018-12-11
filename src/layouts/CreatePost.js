@@ -9,7 +9,8 @@ import "./CreatePost.scss"
 import { handleStorage } from '../util/localStorage';
 import { imageHandler } from '../services/apiS3Images';
 import { ENDPOINTS } from '../services/apiCalls';
-
+import { BUCKET_ENDPOINT } from '../config/config';
+import { dateFormat } from '../util/dateFormat';
 
 export default class CreatePost extends Component {
     constructor(props) {
@@ -37,9 +38,6 @@ export default class CreatePost extends Component {
 
     async componentDidMount() {
 
-
-
-
         if (this.currentPathToEdit) {
             this.setState({ isEdit: true })
             const postEdit = await ENDPOINTS.getSinglePost(this.currentPathToEdit);
@@ -49,34 +47,46 @@ export default class CreatePost extends Component {
                 const contentState = ContentState.createFromBlockArray(processedHTML);
                 editorState = EditorState.createWithContent(contentState);
                 editorState = EditorState.moveFocusToEnd(editorState);
+                this.setState({ ...this.state, ...postEdit, editorState })
 
-                return this.setState({ ...this.state, ...postEdit, editorState })
-            } catch (error) { }
+            } catch (error) { console.log(error) }
         }
 
         let currentBucketId = handleStorage.setLocalStorage();
 
-
         // @TODO ALSO WHEN IT'S ALREADY IN STATE
-        if (handleStorage.setLocalStorage()) {
-            const imagesInBucket = await imageHandler.getListFromS3(currentBucketId);
+        if (handleStorage.setLocalStorage() && !this.state.isEdit) { // If post not saved check the history
+            const createNewListInBucket = new Date(Number(currentBucketId)).toLocaleDateString("en-US")
+            const imagesInBucket = await imageHandler.getListFromS3(createNewListInBucket);
+            this.setState({ images: [...imagesInBucket] })
+        }
+        if (this.state.bucket) { // Expect bucket date as 12-3-2018
+            const imagesInBucket = await imageHandler.getListFromS3(this.state.bucket);
+            console.log(imagesInBucket);
+
             this.setState({ images: [...imagesInBucket] })
         }
 
-
         this.setState({ bucket: handleStorage.getLocalStorage('bucket') })
-
     }
 
     async upLoadImage() {
-        let bucketName = handleStorage.getLocalStorage('bucket');
+        let nextBucketName = handleStorage.getLocalStorage('bucket');
 
-        if (this.state.isEdit) { bucketName = this.state.bucket }
-        if (!bucketName) { return }
+        if (!nextBucketName) { return }
+
+        let bucketName = new Date(Number(nextBucketName)).toLocaleDateString("en-US").replace(/\//g, "-");
+
+        if (this.state.isEdit) { bucketName = new Date(Number(this.state.bucket)).toLocaleDateString("en-US").replace(/\//g, "-"); }  // Should be as 12-3-2018
 
         imageHandler.addToListS3(bucketName, this.imageUpload.current.files[0])
             .then(file => {
+
+                console.log('BUCKET', bucketName);
+
                 const image = [`${file.imageUrl.key}`];
+                console.log('SHOW IMAGE ', image);
+
                 this.setState({ images: [...this.state.images, ...image] })
             })
     }
@@ -84,10 +94,19 @@ export default class CreatePost extends Component {
     async deleteImage(e) {
 
         const bucketData = e.target.id.split('/');
-        // const x = imageHandler.deleteListFromS3(bucketData[0], bucketData[1])
-        // this.setState({
-        //     images: this.state.images.filter((el, i) => i !== Number(index))
-        // })
+
+        // const x = await imageHandler.deleteListFromS3(bucketData[1], bucketData[2])
+        console.log(e.target.id);
+
+        this.setState({
+            images: this.state.images.filter((el, i) => {
+                console.log(el, i);
+                console.log(e.target.id);
+
+
+                // i !== Number(e.target.id)
+            })
+        })
     }
 
     onEditorStateChange = (editorState) => {
@@ -192,7 +211,7 @@ export default class CreatePost extends Component {
                                 {this.state.images.map((file, i) => (
                                     <div className="image" key={i} >
                                         <span className="image_delete" onClick={this.deleteImage} id={file}  > X </span>
-                                        <img className="image-thumbnail" src={`https://s3.amazonaws.com/livingwithannah/${file}`} alt="el.img" />
+                                        <img className="image-thumbnail" src={`${BUCKET_ENDPOINT}/${file}`} alt="el.img" />
                                     </div>
                                 ))}
                             </div>

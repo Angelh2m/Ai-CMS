@@ -3,20 +3,27 @@
 
     section {
         position: relative;
-        padding-bottom: 15rem;
+
+        @include tablet {
+            padding-bottom: 15rem;
+        }
     }
 
     &__content {
-        margin: 1rem 4rem;
-        position: absolute;
-        top: -6rem;
         background-color: white;
-        padding: 3rem 3rem;
-        width: 80%;
+        padding: 2rem 0rem;
         overflow: hidden;
         margin: 0 auto;
         right: 0;
         left: 0;
+
+        @include tablet {
+            margin: 1rem 4rem;
+            position: absolute;
+            top: -6rem;
+            width: 80%;
+            padding: 3rem 3rem;
+        }
     }
 
     p {

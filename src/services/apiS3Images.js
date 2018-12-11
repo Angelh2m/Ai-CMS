@@ -3,6 +3,8 @@ import { API_ENDPOINT } from '../config/config';
 
 
 const getListFromS3 = (bucket) => {
+    console.log("GET", bucket);
+
     return fetch(`${API_ENDPOINT}/uploads/${bucket}`, {
         method: 'GET',
         headers: {
@@ -41,7 +43,6 @@ const deleteListFromS3 = (bucket, file) => {
 const addToListS3 = (bucket, image) => {
     const imageFile = new FormData()
     imageFile.append('image', image);
-
     return fetch(`http://localhost:4000/uploads/${bucket}`, {
         method: 'POST',
         body: imageFile,
