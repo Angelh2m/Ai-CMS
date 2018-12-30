@@ -16,11 +16,9 @@ const getPosts = (num, category) => {
 };
 
 const getSinglePost = (post) => {
-    console.log("POST", post);
-
     return fetch(`${API_ENDPOINT}/api/posts/post/${post}`)
-        .then(res => {
-            return res.json()
+        .then(response => {
+            return response.json()
         })
         .then(posts => {
             return posts
@@ -83,12 +81,28 @@ const login = (user) => {
         .catch(error => console.log(error));
 }
 
+
+const makeComment = (commentPayload) => {
+
+    return fetch(`${API_ENDPOINT}/comments/user`, {
+        method: 'POST',
+        body: JSON.stringify(commentPayload),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+        .then((response) => response.json())
+        .then((response) => response)
+        .catch(error => console.log(error));
+}
+
 export const ENDPOINTS = {
     getSinglePost,
     getPosts,
     getCategories,
     makePost,
     updatePost,
-    login
+    login,
+    makeComment
 }
 

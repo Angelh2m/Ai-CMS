@@ -724,3 +724,20 @@ a {
   color: #fb6e59;
   text-decoration: none;
 }
+
+.link {
+  cursor: pointer;
+  color: #fb6e59;
+  text-decoration: none;
+  font-size: .8rem;
+  transition: all 1s;
+}
+
+.link:hover {
+  text-decoration: underline;
+  transition: all 1s;
+}
+
+textarea {
+  border: solid 1px gainsboro;
+}

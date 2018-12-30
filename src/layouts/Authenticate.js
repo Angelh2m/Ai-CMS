@@ -25,13 +25,18 @@ export default class Authenticate extends Component {
     async submitValues() {
         const x = await ENDPOINTS.login(this.state)
 
-        if (x) { handleStorage.setToken(x.authToken) }
+        if (x) {
+            handleStorage.setToken(x.authToken)
+            this.setState({ message: "You are logged in now" })
+        }
     }
 
     render() {
         return (
             <div>
-
+                {this.state.message && (
+                    <h2>{this.state.message}</h2>
+                )}
                 <FormFields
                     event={this.setValues}
                     className="form__field"

@@ -1,0 +1,113 @@
+.comments {
+    background-color: #fbfbfb;
+    border: solid 3px #ececec;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+
+
+
+    &__header-format {
+        justify-content: left;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    &__avatar {
+        border-radius: 50%;
+        width: 4rem;
+    }
+
+    &__user {
+        color: #284290;
+        font-weight: 700;
+        margin-left: 1rem;
+    }
+
+    &__form {
+        overflow-wrap: break-word;
+        width: 100%;
+        position: relative;
+        display: block;
+        height: 7rem;
+        padding: 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    p {
+        margin-bottom: 0;
+        margin-top: 1.5rem;
+    }
+
+}
+
+.quickreply {
+    display: flex;
+    cursor: pointer;
+
+    &__button {
+        cursor: pointer;
+        background-color: #fbfbfb;
+        color: #4c4b4b;
+        font-size: .9rem;
+        padding: .7rem;
+        border-radius: 5rem;
+        margin-right: 1.5rem;
+        box-shadow: 0px 0px 1px 1px #d8d8d8;
+        font-weight: 600;
+        position: relative;
+        border: solid 2px transparent;
+        margin-bottom: 1.5rem;
+
+        &:active {
+            outline: none;
+            border: none;
+            border: solid 2px #284290;
+        }
+
+        &:focus {
+            outline: 0;
+            border: solid 2px #284290;
+        }
+
+
+        // &:before {
+        //     background-color: #f8eeea;
+        //     transition: all 2s;
+        //     content: '';
+        //     position: absolute;
+        //     transform: scale(1);
+        //     top: 0;
+        //     left: 0;
+        //     border-radius: 30rem;
+        //     width: 100%;
+        //     height: 100%;
+        //     opacity: .3;
+        //     z-index: -1;
+        // }
+
+        &:focus,
+        &:active {
+            // &:before {
+            //     background-color: #cccccc;
+            //     transition: all .2s;
+            //     content: '';
+            //     position: absolute;
+            //     -webkit-transform: scale(1.2);
+            //     transform: scale(1.2);
+            //     opacity: .3;
+            //     height: 3rem;
+            //     top: -.3rem;
+            // }
+        }
+    }
+
+}
+
+.form-comments {
+    margin-bottom: 1.5rem;
+
+    &__avatar {
+        border-radius: 49%;
+        width: 2rem;
+    }
+}

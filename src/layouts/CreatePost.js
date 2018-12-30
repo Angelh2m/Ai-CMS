@@ -58,13 +58,16 @@ export default class CreatePost extends Component {
         if (handleStorage.setLocalStorage() && !this.state.isEdit) { // If post not saved check the history
             const createNewListInBucket = new Date(Number(currentBucketId)).toLocaleDateString("en-US")
             const imagesInBucket = await imageHandler.getListFromS3(createNewListInBucket);
-            this.setState({ images: [...imagesInBucket] })
+            if (imagesInBucket) {
+                this.setState({ images: [...imagesInBucket] })
+            }
         }
         if (this.state.bucket) { // Expect bucket date as 12-3-2018
             const imagesInBucket = await imageHandler.getListFromS3(this.state.bucket);
             console.log(imagesInBucket);
-
-            this.setState({ images: [...imagesInBucket] })
+            if (imagesInBucket) {
+                this.setState({ images: [...imagesInBucket] })
+            }
         }
 
         this.setState({ bucket: handleStorage.getLocalStorage('bucket') })
@@ -225,7 +228,6 @@ export default class CreatePost extends Component {
                             onEditorStateChange={this.onEditorStateChange}
                         />
                         <textarea
-                            disabled
                             value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
                             ref={this.htmlBody}
                         />

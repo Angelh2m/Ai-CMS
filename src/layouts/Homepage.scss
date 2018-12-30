@@ -4,8 +4,9 @@
     section {
         position: relative;
 
-        @include tablet {
-            padding-bottom: 15rem;
+        @include desktop {
+            margin-bottom: 20rem;
+
         }
     }
 
@@ -17,12 +18,15 @@
         right: 0;
         left: 0;
 
-        @include tablet {
-            margin: 1rem 4rem;
+        @include desktop {
+            margin: auto;
             position: absolute;
             top: -6rem;
             width: 80%;
             padding: 3rem 3rem;
+            max-width: 40rem;
+            /* left: 0; */
+            right: 0;
         }
     }
 

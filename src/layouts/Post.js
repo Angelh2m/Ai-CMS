@@ -4,6 +4,7 @@ import { ENDPOINTS } from '../services/apiCalls';
 import { dateFormat } from '../util/dateFormat';
 import SocialMedia from '../components/SocialMedia/SocialMedia';
 import HelmetSEO from '../util/HelmetSEO';
+import Comments from '../components/Comments/Comments';
 
 export default class Post extends Component {
 
@@ -20,18 +21,20 @@ export default class Post extends Component {
             const date = dateFormat(post.date)
             post = { ...post, date, }
             this.setState({ post })
-            // console.log(post);
         })
     }
 
     async getAllPosts(location) {
         const result = await ENDPOINTS.getSinglePost(location);
+        console.log("rest ", result);
         return result
     }
 
     render() {
         const { post } = this.state;
         let date = new Date();
+
+        const adminFound = localStorage.getItem('token');
 
         return (
             <div className="posts" >
@@ -42,6 +45,17 @@ export default class Post extends Component {
                     seoUrl={post.seoUrl}
                 />
                 <section>
+                    {adminFound && (
+                        <div>
+                            <Link
+                                className="button--salmon--inverted"
+                                to={`/write-post/${this.props.location.pathname.split('/')[2]}`} >Edit </Link>
+
+                            <Link
+                                className="button--salmon--inverted"
+                                to={`/write-post/`} >Write New </Link>
+                        </div>
+                    )}
                     <div className="container--block ">
                         {/* <div className="col-1 posts__social-column">Social</div> */}
                         <div className="posts__meta">
@@ -67,6 +81,7 @@ export default class Post extends Component {
                                     </p>
                                 </div>
                             </div>
+                            <Comments comments={this.state.post.comment} location={this.props.location.pathname} />
                         </div>
                     </div>
                 </section>

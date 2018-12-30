@@ -7,12 +7,13 @@ export default function FormFields({
     name,
     value,
     textLabel,
-    event
+    event,
+    disLabel
 }) {
     return (
         <div>
-            {textLabel && (<label>{textLabel}</label>)}
-            {name && !textLabel && (<label>{name}</label>)}
+            {textLabel && disLabel && (<label>{textLabel}</label>)}
+            {name && !textLabel && disLabel && (<label>{name}</label>)}
             <input
                 type={type}
                 name={name}

@@ -40,3 +40,53 @@
     border: solid 1px whitesmoke;
     background-color: $color-dark-pink;
 }
+
+.button--comment {
+    background-color: #fbfbfb;
+    color: #4c4b4b;
+    font-size: .9rem;
+    border-radius: 5rem;
+    margin-right: 1.5rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    letter-spacing: 1px;
+    padding: 0.5rem 2rem;
+}
+
+
+.button--facebook {
+    background-color: #284290;
+    color: white;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    font-size: .9rem;
+    margin-right: .5rem;
+}
+
+.button--google {
+    background-color: white;
+    color: #505050;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    font-size: .9rem;
+    position: relative;
+}
+
+
+.button--salmon--inverted {
+    text-decoration: none;
+    color: white;
+    background-color: #fb6e59;
+    border-radius: 5px;
+    padding: .5rem;
+    margin-left: .5rem;
+    font-size: .8rem;
+    position: relative;
+    display: inline-block;
+    margin-bottom: .5rem;
+    float: right
+}
